@@ -14,3 +14,9 @@ jobs:
           curl -X POST https://api.groupme.com/v3/bots/post \
             -H "Content-Type: application/json" \
             -d '{"text": "keepGV active", "bot_id": "${{ secrets.GM_BOT_ID }}"}'
+            - name: Send GroupMe Message
+  run: |
+    curl -X POST https://api.groupme.com/v3/bots/post \
+      -H "Content-Type: application/json" \
+      -d '{"text": "keepGV active from GitHub", "bot_id": "3877d30a12ed67e60ac2aa04db"}'
+
