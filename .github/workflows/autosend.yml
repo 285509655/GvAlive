@@ -9,10 +9,10 @@ jobs:
   send-message:
     runs-on: ubuntu-latest
     steps:
-      - name: Send GroupMe Message
-        run: |
-          curl -X POST https://api.groupme.com/v3/bots/post \
-            -H "Content-Type: application/json" \
-            -d '{"text": "keepGV active", "bot_id": "${{ secrets.GM_BOT_ID }}"}'
+- name: Send GroupMe Message
+  run: |
+    curl -X POST https://api.groupme.com/v3/bots/post \
+      -H "Content-Type: application/json" \
+      -d "{\"text\": \"keepGV active\", \"bot_id\": \"${{ secrets.GM_BOT_ID }}\"}"
 
 
