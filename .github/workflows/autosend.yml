@@ -1,21 +1,19 @@
-name: "Autosend"
+name: Test GroupMe Message
 
 on:
-  push:
-    branches: master
-  schedule:
-    - cron: 30 0 */10 * * # 每10天8点30自动执行，北京时间减8个钟头
   workflow_dispatch:
-    inputs: {}
 
 jobs:
-  autosend:
+  test-send:
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v2
-      - name: pushBotMsg
+      - name: Send test message
         uses: joelwmale/webhook-action@master
         with:
-          url: "https://api.groupme.com/v3/bots/post"
-          body: '{"text" : "keepGV active", "bot_id" : "${{ secrets.GM_BOT_ID }}" }'
+          url: https://api.groupme.com/v3/bots/post
+          headers: '{ "Content-Type": "application/json" }'
+          body: |
+            {
+              "bot_id": "${{ secrets.GM_BOT_ID }}",
+              "text": "keepGV active"
+            }
