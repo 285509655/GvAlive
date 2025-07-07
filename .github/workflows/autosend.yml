@@ -1,19 +1,16 @@
-name: Test GroupMe Message
+name: Keep GV Alive
 
 on:
+  schedule:
+    - cron: '30 1 */10 * *'  # 每10天 09:30（北京时间）运行
   workflow_dispatch:
 
 jobs:
-  test-send:
+  send:
     runs-on: ubuntu-latest
     steps:
-      - name: Send test message
-        uses: joelwmale/webhook-action@master
-        with:
-          url: https://api.groupme.com/v3/bots/post
-          headers: '{ "Content-Type": "application/json" }'
-          body: |
-            {
-              "bot_id": "${{ secrets.GM_BOT_ID }}",
-              "text": "keepGV active"
-            }
+      - name: Send GroupMe message
+        run: |
+          curl -X POST -H "Content-Type: application/json" \
+          -d "{\"text\": \"keepGV active\", \"bot_id\": \"${{ secrets.GM_BOT_ID }}\"}" \
+          https://api.groupme.com/v3/bots/post
