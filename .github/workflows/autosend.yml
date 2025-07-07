@@ -2,12 +2,13 @@ name: "GvAlive"
 
 on:
   schedule:
-    - cron: '30 0 */10 * *'  # 每10天 08:30（北京时间）
-  workflow_dispatch:
+    - cron: '30 0 */5 * *'  # 每5天的 UTC 00:30 执行一次（北京时间 08:30）
+  workflow_dispatch:        # 允许手动触发
 
 jobs:
   send-message:
     runs-on: ubuntu-latest
+
     steps:
       - name: Send GroupMe Message
         run: |
