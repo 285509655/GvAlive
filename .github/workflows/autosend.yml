@@ -1,16 +1,16 @@
-name: Keep GV Alive
+name: "GvAlive"
 
 on:
   schedule:
-    - cron: '30 1 */10 * *'  # 每10天 09:30（北京时间）运行
+    - cron: '30 0 */10 * *'  # 每10天 UTC时间 00:30 执行一次（北京时间 08:30）
   workflow_dispatch:
 
 jobs:
-  send:
+  send-message:
     runs-on: ubuntu-latest
     steps:
-      - name: Send GroupMe message
+      - name: Send GroupMe Message
         run: |
-          curl -X POST -H "Content-Type: application/json" \
-          -d "{\"text\": \"keepGV active\", \"bot_id\": \"${{ secrets.GM_BOT_ID }}\"}" \
-          https://api.groupme.com/v3/bots/post
+          curl -X POST https://api.groupme.com/v3/bots/post \
+            -H "Content-Type: application/json" \
+            -d '{"text": "keepGV active", "bot_id": "${{ secrets.GM_BOT_ID }}"}'
